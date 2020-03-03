@@ -7,6 +7,9 @@
       <text class="userinfo-nickname">{{userInfo.nickName}}</text>
     </block>
   </view>
+  <form report-submit='true' >
+   <button  form-type='submit'>获取formid</button>
+  </form>
   <button bindtap='houduanButton1'>点击发起请求</button>
   <view wx:for="{{list}}">
     姓名：{{item}}

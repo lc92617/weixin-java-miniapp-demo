@@ -1,5 +1,6 @@
 package com.github.binarywang.demo.wx.miniapp.controller;
 
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -11,7 +12,7 @@ import java.util.Map;
 @RestController
 public class TestController {
 
-    @RequestMapping("getUser")
+    @GetMapping("getUser")
     public Map<String, Object> getUser(){
         System.out.println("微信小程序正在调用。。。");
         Map<String, Object> map = new HashMap<String, Object>();
