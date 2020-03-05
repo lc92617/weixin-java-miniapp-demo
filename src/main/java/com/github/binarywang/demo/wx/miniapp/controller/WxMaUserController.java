@@ -21,7 +21,7 @@ import java.util.Map;
  * @author <a href="https://github.com/binarywang">Binary Wang</a>
  */
 @RestController
-@RequestMapping("/wx/user/{appid}")
+@RequestMapping("user/{appid}")
 public class WxMaUserController {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 

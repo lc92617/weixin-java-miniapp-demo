@@ -34,7 +34,7 @@ import me.chanjar.weixin.common.error.WxErrorException;
  * @author <a href="https://github.com/binarywang">Binary Wang</a>
  */
 @RestController
-@RequestMapping("/wx/media/{appid}")
+@RequestMapping("/media/{appid}")
 public class WxMaMediaController {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
