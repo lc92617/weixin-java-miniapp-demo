@@ -18,7 +18,8 @@ import java.util.Map;
 /**
  * 微信小程序用户接口
  *
- * @author <a href="https://github.com/binarywang">Binary Wang</a>
+ * @author <a href="https:f:wq:wq
+ * :QZQ//github.com/binarywang">Binary Wang</a>
  */
 @RestController
 @RequestMapping("user/{appid}")
