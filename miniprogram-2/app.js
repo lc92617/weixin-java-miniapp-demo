@@ -17,14 +17,18 @@ App({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
         wx.request({
-          url: this.globalData.baseUrl + '/user/' + this.globalData.appId + '/login',
-          method: 'GET',
+          url: this.globalData.baseUrl + '/user/login',
+          method: 'POST',
           header: {
             'content-type': 'application/json', // 默认值
+            'appid': this.globalData.appId
+          },
+          data: {
             'code': res.code
           },
           success: function(res) {
-            wx.setStorageSync("sessionId", res.data.sessionKey)
+            console.log(res)
+            wx.setStorageSync("sessionId", res)
           }
         })
       }
@@ -40,8 +44,12 @@ App({
               this.globalData.userInfo = res.userInfo
               console.log(res)
               wx.request({
-                url: this.globalData.baseUrl + '/user/' + this.globalData.appId + '/info',
+                url: this.globalData.baseUrl + '/user/info',
                 method: 'POST',
+                header: {
+                  'content-type': 'application/json', // 默认值
+                  'appid': this.globalData.appId
+                },
                 data: {
                   'content-type': 'application/json', // 默认值
                   'sessionKey': wx.getStorageSync("sessionId"),
