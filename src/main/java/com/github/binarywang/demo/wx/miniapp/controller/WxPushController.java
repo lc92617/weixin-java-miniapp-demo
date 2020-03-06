@@ -18,7 +18,7 @@ import me.chanjar.weixin.common.error.WxErrorException;
  */
 @RestController
 @RequestMapping("/wx/push/{appid}")
-public class PushController {
+public class WxPushController {
 
     @GetMapping("/push")
     public String push(@PathVariable String appid, @RequestParam String openid, @RequestParam String formid) {

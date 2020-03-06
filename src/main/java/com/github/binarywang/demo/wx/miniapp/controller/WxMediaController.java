@@ -35,7 +35,7 @@ import me.chanjar.weixin.common.error.WxErrorException;
  */
 @RestController
 @RequestMapping("/media/{appid}")
-public class WxMaMediaController {
+public class WxMediaController {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     /**

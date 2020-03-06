@@ -1,6 +1,8 @@
 package com.github.binarywang.demo.wx.miniapp.controller;
 
+import com.github.binarywang.demo.wx.miniapp.model.common.UserAccount;
 import com.github.binarywang.demo.wx.miniapp.model.req.WeChatLoginReq;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,14 +26,14 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/user")
-public class WxMaUserController {
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+@Slf4j
+public class WxUserController extends BaseController{
 
     /**
      * 登陆接口
      */
     @PostMapping("/login")
-    public WxMaJscode2SessionResult login(@PathVariable String appid, @RequestBody WeChatLoginReq weChatLoginReq) {
+    public String login(@RequestHeader String appid, @RequestBody WeChatLoginReq weChatLoginReq) {
         String code = weChatLoginReq.getCode();
         if (StringUtils.isBlank(code)) {
             return null;
@@ -41,13 +43,18 @@ public class WxMaUserController {
 
         try {
             WxMaJscode2SessionResult session = wxService.getUserService().getSessionInfo(code);
-            this.logger.info(session.getSessionKey());
-            this.logger.info(session.getOpenid());
+            log.info(session.getSessionKey());
+            log.info(session.getOpenid());
             //TODO 可以增加自己的逻辑，关联业务相关数据
-            return session;
+            UserAccount userAccount = new UserAccount();
+            userAccount.setWxOpenId(session.getOpenid());
+            userAccount.setSessionKey(session.getSessionKey());
+            String token = getToken(userAccount);
+//            userAccount.setPassword(weChatLoginReq.getPassword());
+            return token;
 //            return JsonUtils.toJson(session);
         } catch (WxErrorException e) {
-            this.logger.error(e.getMessage(), e);
+            log.error(e.getMessage(), e);
             return null;
         }
     }
@@ -58,7 +65,7 @@ public class WxMaUserController {
      * </pre>
      */
     @PostMapping("/info")
-    public String info(@PathVariable String appid, @RequestBody Map<String, String> body) {
+    public String info(@RequestHeader String appid, @RequestBody Map<String, String> body) {
         final WxMaService wxService = WxMaConfiguration.getMaService(appid);
 
         String sessionKey = body.get("sessionKey");

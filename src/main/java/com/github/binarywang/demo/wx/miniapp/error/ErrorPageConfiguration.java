@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
  *
  * @author <a href="https://github.com/binarywang">Binary Wang</a>
  */
-@Component
+//@Component
 public class ErrorPageConfiguration implements ErrorPageRegistrar {
   @Override
   public void registerErrorPages(ErrorPageRegistry errorPageRegistry) {
