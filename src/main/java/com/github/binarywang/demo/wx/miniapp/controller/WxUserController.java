@@ -1,5 +1,6 @@
 package com.github.binarywang.demo.wx.miniapp.controller;
 
+import com.github.binarywang.demo.wx.miniapp.model.req.WeChatLoginReq;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,15 +23,16 @@ import java.util.Map;
  * :QZQ//github.com/binarywang">Binary Wang</a>
  */
 @RestController
-@RequestMapping("user/{appid}")
+@RequestMapping("/user")
 public class WxMaUserController {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     /**
      * 登陆接口
      */
-    @GetMapping("/login")
-    public WxMaJscode2SessionResult login(@PathVariable String appid, @RequestHeader String code) {
+    @PostMapping("/login")
+    public WxMaJscode2SessionResult login(@PathVariable String appid, @RequestBody WeChatLoginReq weChatLoginReq) {
+        String code = weChatLoginReq.getCode();
         if (StringUtils.isBlank(code)) {
             return null;
         }
